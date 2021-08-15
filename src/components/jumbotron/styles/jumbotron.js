@@ -16,7 +16,7 @@ export const Inner = styled.div`
 
 export const Container = styled.div``;
 
-export const Pane= styled.div`
+export const Pane = styled.div`
   width : 50%;
 
   @media(max-width:1000px){
@@ -29,16 +29,19 @@ export const Pane= styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 50px;
+  font-size: 3.125rem;
   margin-bottom:8px;
 
   @media (max-width:600px){
-      font-size:35px;
+      font-size:1.625rem;
   }
 
 `;
 
-export const Subtitle = styled.h2``;
+export const Subtitle = styled.h2`
+    font-size: 1.625rem;
+    font-weight: 400;
+`;
 
 export const Image = styled.img`
   max-width:100%;
