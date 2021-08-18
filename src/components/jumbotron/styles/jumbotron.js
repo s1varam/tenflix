@@ -31,7 +31,7 @@ export const Pane = styled.div`
 export const Title = styled.h1`
   font-size: 3.125rem;
   margin-bottom:8px;
-  padding: 0 3rem 0 0;
+  // padding: 0 3rem 0 0;
 
   @media (max-width:600px){
       font-size:1.625rem;
@@ -42,7 +42,7 @@ export const Title = styled.h1`
 export const Subtitle = styled.h2`
     font-size: 1.625rem;
     font-weight: 400;
-    padding: 0 3rem 0 0;
+    // padding: 0 3rem 0 0;
 `;
 
 export const Image = styled.img`
