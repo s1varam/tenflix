@@ -22,7 +22,7 @@ export const Text = styled.div`
     font-size: 13px;
     color: #757575;
     margin-bottom: 40px;
-    margin-top: 40px;
+    margin-bottom: 40px;
 `;
 
 export const Row = styled.div`

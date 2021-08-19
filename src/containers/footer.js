@@ -35,7 +35,11 @@ export default function FooterContainer(){
                     </Footer.Column>
                 </Footer.Row>
                 <Footer.Break></Footer.Break>
-                <Footer.Text>Netflix India</Footer.Text>
+                <Footer.Text>
+                    <Footer.Link href="#">
+                        Netflix India
+                    </Footer.Link>
+                </Footer.Text>
             </Footer>
         </>
     );
