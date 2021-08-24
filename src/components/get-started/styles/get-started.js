@@ -18,7 +18,7 @@ export const Input = styled.input`
   width: 100%;
   border: 0;
   padding: 10px;
-  height: 70px;
+  height: 8vh;
   box-sizing: border-box;
 `;
 
@@ -30,11 +30,11 @@ export const Break = styled.div`
 export const Button = styled.button`
   display: flex;
   align-items: center;
-  height: 70px;
+  height: 8vh;
   background: #e50914;
   color: white;
   padding: 0 32px;
-  font-size: 26px;
+  font-size: 1.25em;
   border: 0;
   cursor: pointer;
 

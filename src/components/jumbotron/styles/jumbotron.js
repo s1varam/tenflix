@@ -28,6 +28,21 @@ export const Pane = styled.div`
 
 `;
 
+export const AnimationWrapper = styled.div`
+
+
+`;
+
+export const Animation = styled.video`
+
+
+`;
+
+export const ImageWrapper = styled.div`
+
+
+`;
+
 export const Title = styled.h1`
   font-size: 3.125rem;
   margin-bottom:8px;

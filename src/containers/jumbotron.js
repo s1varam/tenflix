@@ -1,5 +1,5 @@
 import React from 'react';
-import {Jumbotron} from '../components/jumbotron';
+import { Jumbotron } from '../components/jumbotron';
 import jumboJson from '../fixtures/jumbo.json'
 
 export function JumbotronContainer() {
@@ -14,7 +14,17 @@ export function JumbotronContainer() {
             <Jumbotron.Subtitle>{item.subTitle}</Jumbotron.Subtitle>
           </Jumbotron.Pane>
           <Jumbotron.Pane>
-            <Jumbotron.Image src={item.image} alt={item.alt} />
+            <Jumbotron.ImageWrapper>
+              <Jumbotron.Image src={item.image} alt={item.alt} />
+              <Jumbotron.AnimationWrapper>
+              {/* <Jumbotron.Animation autoPlay playsInline muted loop>
+                {item.video} &&
+                <source src={item.videoURL} type="video/mp4">
+                </source>
+              </Jumbotron.Animation> */}
+            </Jumbotron.AnimationWrapper>
+            </Jumbotron.ImageWrapper>
+            
           </Jumbotron.Pane>
         </Jumbotron>
       ))}
