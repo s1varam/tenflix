@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
-import {GlobalStyle} from './global-styles'
-import 'normalize.css'
-
+import {GlobalStyle} from './global-styles';
+import 'normalize.css';
+import {firebase} from './libs/firebase.prod'
 
 ReactDOM.render(
     <>
