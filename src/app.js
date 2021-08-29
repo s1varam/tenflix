@@ -9,23 +9,29 @@ import Homepage from './pages/homepage';
 import Browse from './pages/browse';
 import Signin from './pages/signin';
 import Signup from './pages/signup';
+import { IsUserRedirect, ProtectedRoute } from './helpers/routes';
+import { useAuthListener } from './hooks';
 
 export default function App() {
+  const { user } = useAuthListener();
+
   return (
     <>
       <Router>
-        <Route exact path={ROUTES.HOME}>
-          <Homepage />
-        </Route>
-        <Route exact path='/signin'>
-          <Signin />
-        </Route>
-        <Route exact path='/signup'>
-          <Signup />
-        </Route>
-        <Route exact path='/browse'>
-          <Browse />
-        </Route>
+        <Switch>
+          <IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGNIN}>
+            <Signin />
+          </IsUserRedirect>
+          <IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.SIGNUP}>
+            <Signup />
+          </IsUserRedirect>
+          <ProtectedRoute user={user} path={ROUTES.BROWSE}>
+            <Browse />
+          </ProtectedRoute>
+          <IsUserRedirect user={user} loggedInPath={ROUTES.BROWSE} path={ROUTES.HOME}>
+            <Homepage />
+          </IsUserRedirect>
+        </Switch>
       </Router>
     </>
   );

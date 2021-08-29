@@ -21,7 +21,7 @@ import {
 
 export function Header({ bg = true, children, ...restProps }) {
   return bg ? (
-    <Background data-testid="header-bg" {...restProps}>
+    <Background  {...restProps}>
       {children}
     </Background>
   ) : (
