@@ -20,12 +20,15 @@ export function BrowseContainer({ slides }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [slideRows, setSlideRows] = useState([]);
 
+  const [genres, setGenres] = useState([]);
+  const [movies, setMovies] = useState([]);
+
   const { firebase } = useContext(FirebaseContext);
   const user = firebase.auth().currentUser || {};
 
   useEffect(() => {
     debugger
-    searchMovies();
+    fetchGenres();
     setTimeout(() => {
       setLoading(false);
     }, 3000);
@@ -47,24 +50,52 @@ export function BrowseContainer({ slides }) {
   }, [searchTerm]);
 
 
-  const searchMovies = async () => {
-    // e.preventDefault();
-
-    const query = "Jurassic Park";
-
+  const fetchGenres = async () => {
     const url = `https://api.themoviedb.org/3/genre/movie/list?api_key=65836c0be1ed3720a320845daa52d65e&language=en-US`;
-    
+
     try {
       const res = await fetch(url);
       const data = await res.json();
-      console.log("genres.....................")
-      console.log(data);
+      setGenres(data.genres);
     } catch (err) {
       console.error(err);
     }
-  }
+    fetchMovies();
+  };
+
+  const fetchMovies = async () => {
+    let result = [];
+
+    for (const genre of genres) {
+      const url = `https://api.themoviedb.org/3/discover/movie?api_key=65836c0be1ed3720a320845daa52d65e&with_genres=${genre.id}`;
+      const res = await fetch(url);
+      const { results } = await res.json();
+
+      result = [...result, ...results];
+    }
+
+    setMovies(result);
+  };
+
+  React.useEffect(() => {
+    fetchMovies();
+  }, [genres]);
+
+  const resultArray = React.useMemo(() => {
+    return genres.map((genre) => ({
+      genre,
+      movies: movies.filter((movie) => movie.genre_ids.includes(genre.id))
+    }));
+  }, [genres, movies]);
 
 
+
+  React.useEffect(() => {
+    fetchGenres();
+  }, []);
+  
+  console.log("resssss :/:/:/:/:/");
+  console.log(resultArray);
 
   return profile.displayName ? (
     <>
@@ -110,16 +141,16 @@ export function BrowseContainer({ slides }) {
       </Header>
 
       <Card.Group>
-        {slideRows.map((slideItem) => (
-          <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
-            <Card.Title>{slideItem.title}</Card.Title>
+        {resultArray.map((slideItem) => (
+          <Card key={slideItem.genre.id}>
+            <Card.Title>{slideItem.genre.name}</Card.Title>
             <Card.Entities>
-              {slideItem.data.map((item) => (
-                <Card.Item key={item.docId} item={item}>
-                  <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`} />
+              {slideItem.movies.map((item,i) => (
+                <Card.Item key={i} item={item}>
+                  <Card.Image src={`https://image.tmdb.org/t/p/w500`+item.poster_path} />
                   <Card.Meta>
                     <Card.SubTitle>{item.title}</Card.SubTitle>
-                    <Card.Text>{item.description}</Card.Text>
+                    <Card.Text>{item.overview}</Card.Text>
                   </Card.Meta>
                 </Card.Item>
               ))}
